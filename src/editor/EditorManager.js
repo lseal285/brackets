@@ -59,7 +59,8 @@ define(function (require, exports, module) {
         Editor              = require("editor/Editor").Editor,
         InlineTextEditor    = require("editor/InlineTextEditor").InlineTextEditor,
         Strings             = require("strings"),
-        LanguageManager     = require("language/LanguageManager");
+        LanguageManager     = require("language/LanguageManager"),
+        FileViewController  = require("project/FileViewController");
     
     /** @type {jQueryObject} DOM node that contains all editors (visible and hidden alike) */
     var _editorHolder = null;
@@ -661,7 +662,7 @@ define(function (require, exports, module) {
         }
         
         // Clean up currently viewing document or custom viewer
-        DocumentManager._clearCurrentDocument();
+        DocumentManager._quietClearCurrentDocument();
         _removeCustomViewer();
     
         // Hide the not-editor or reset current editor
@@ -673,7 +674,8 @@ define(function (require, exports, module) {
         // add path, dimensions and file size to the view after loading image
         _$currentCustomViewer = provider.render(fullPath, $("#editor-holder"));
         
-        _setCurrentlyViewedPath(fullPath);
+        _currentlyViewedPath = fullPath;
+        FileViewController.setFileViewFocus(FileViewController.PROJECT_MANAGER);
     }
 
     /**

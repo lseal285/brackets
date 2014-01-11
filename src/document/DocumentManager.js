@@ -515,6 +515,10 @@ define(function (require, exports, module) {
         }
     }
     
+    
+    function _quietClearCurrentDocument() {
+        _currentDocument = null;
+    }
 
     
     /**
@@ -994,11 +998,11 @@ define(function (require, exports, module) {
     
     // For unit tests and internal use only
     exports._clearCurrentDocument       = _clearCurrentDocument;
+    exports._quietClearCurrentDocument  = _quietClearCurrentDocument;
     
     // Define public API
     exports.Document                    = DocumentModule.Document;
     exports.getCurrentDocument          = getCurrentDocument;
-    exports._clearCurrentDocument        = _clearCurrentDocument;
     exports.getDocumentForPath          = getDocumentForPath;
     exports.getOpenDocumentForPath      = getOpenDocumentForPath;
     exports.getDocumentText             = getDocumentText;
